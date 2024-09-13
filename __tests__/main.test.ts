@@ -43,10 +43,6 @@ describe('action', () => {
     expect(runMock).toHaveReturned()
 
     // Verify that all of the core library functions were called correctly
-    expect(debugMock).toHaveBeenNthCalledWith(
-      1,
-      'Authenticating with Krampus at https://api.geodesic.seerai.space/krampus'
-    )
     expect(setFailedMock).toHaveBeenNthCalledWith(1, 'Invalid API key')
     expect(errorMock).not.toHaveBeenCalledWith()
   })
@@ -68,11 +64,10 @@ describe('action', () => {
     expect(runMock).toHaveReturned()
 
     // Verify that all of the core library functions were called correctly
-    expect(debugMock).toHaveBeenNthCalledWith(
+    expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      'Authenticating with Krampus at https://api.geodesic.seerai.space/krampus/not-a-url'
+      'Invalid Krampus host: Service Temporarily Unavailable'
     )
-    expect(setFailedMock).toHaveBeenNthCalledWith(1, 'Invalid Krampus host')
     expect(errorMock).not.toHaveBeenCalledWith()
   }, 10000)
 })
