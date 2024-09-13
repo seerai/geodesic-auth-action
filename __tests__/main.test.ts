@@ -13,7 +13,6 @@ import * as main from '../src/main'
 const runMock = jest.spyOn(main, 'run')
 
 // Mock the GitHub Actions core library
-let debugMock: jest.SpiedFunction<typeof core.debug>
 let errorMock: jest.SpiedFunction<typeof core.error>
 let getInputMock: jest.SpiedFunction<typeof core.getInput>
 let setFailedMock: jest.SpiedFunction<typeof core.setFailed>
@@ -22,7 +21,6 @@ describe('action', () => {
   beforeEach(() => {
     jest.clearAllMocks()
 
-    debugMock = jest.spyOn(core, 'debug').mockImplementation()
     errorMock = jest.spyOn(core, 'error').mockImplementation()
     getInputMock = jest.spyOn(core, 'getInput').mockImplementation()
     setFailedMock = jest.spyOn(core, 'setFailed').mockImplementation()
@@ -43,10 +41,6 @@ describe('action', () => {
     expect(runMock).toHaveReturned()
 
     // Verify that all of the core library functions were called correctly
-    expect(debugMock).toHaveBeenNthCalledWith(
-      1,
-      'Authenticating with Krampus at https://api.geodesic.seerai.space/krampus'
-    )
     expect(setFailedMock).toHaveBeenNthCalledWith(1, 'Invalid API key')
     expect(errorMock).not.toHaveBeenCalledWith()
   })
@@ -57,7 +51,7 @@ describe('action', () => {
       switch (name) {
         case 'api-key':
           return 'not an api key'
-        case 'host':
+        case 'krampus-host':
           return 'https://api.geodesic.seerai.space/krampus/not-a-url'
         default:
           return ''
@@ -68,11 +62,10 @@ describe('action', () => {
     expect(runMock).toHaveReturned()
 
     // Verify that all of the core library functions were called correctly
-    expect(debugMock).toHaveBeenNthCalledWith(
+    expect(setFailedMock).toHaveBeenNthCalledWith(
       1,
-      'Authenticating with Krampus at https://api.geodesic.seerai.space/krampus/not-a-url'
+      'Invalid Krampus host: Service Temporarily Unavailable'
     )
-    expect(setFailedMock).toHaveBeenNthCalledWith(1, 'Invalid Krampus host')
     expect(errorMock).not.toHaveBeenCalledWith()
   }, 10000)
 })

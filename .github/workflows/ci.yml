@@ -58,3 +58,4 @@ jobs:
         uses: ./
         with:
           api-key: ${{ secrets.GEODESIC_API_KEY }}
+          krampus-host: https://api.geodesic-test.seerai.space/krampus

@@ -24958,11 +24958,11 @@ const core = __importStar(__nccwpck_require__(2186));
 async function run() {
     try {
         const apikey = core.getInput('api-key');
-        let host = core.getInput('host');
+        let host = core.getInput('krampus-host');
         if (host === '') {
             host = 'https://api.geodesic.seerai.space/krampus';
         }
-        core.debug(`Authenticating with Krampus at ${host}`);
+        console.log(`Authenticating with Krampus at ${host}`);
         // make a get request to krampus to see if the api key is valid
         const response = await fetch(`${host}/api/v1/auth/token`, {
             method: 'GET',
@@ -24972,10 +24972,11 @@ async function run() {
         });
         if (!response.ok) {
             if (response.status === 503 || response.status === 404) {
-                throw new Error('Invalid Krampus host');
+                throw new Error(`Invalid Krampus host: ${response.statusText}`);
             }
             else if (response.status === 500) {
-                throw new Error('Invalid API key');
+                console.log(`Failed to authenticate with Krampus: ${await response.text()}`);
+                throw new Error(`Invalid API key`);
             }
             else {
                 throw new Error(`Failed to authenticate with Krampus: ${response.statusText}`);
@@ -24983,12 +24984,12 @@ async function run() {
         }
         // make sure the response has a token in it
         const json = JSON.parse(await response.text());
-        if (!json['access-token']) {
+        if (!('access_token' in json)) {
             throw new Error('Did not recieve a token from Krampus');
         }
         core.exportVariable('GEODESIC_API_KEY', apikey);
         core.exportVariable('GEODESIC_HOST', host);
-        core.debug('Successfully authenticated with Krampus');
+        console.log('Successfully authenticated with Krampus');
     }
     catch (error) {
         // Fail the workflow run if an error occurs
