@@ -21,5 +21,5 @@ inputs:
     default: 'https://api.geodesic.seerai.space/krampus'
 
 runs:
-  using: node20
+  using: node21
   main: dist/index.js
