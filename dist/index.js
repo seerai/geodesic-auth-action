@@ -24958,7 +24958,7 @@ const core = __importStar(__nccwpck_require__(2186));
 async function run() {
     try {
         const apikey = core.getInput('api-key');
-        let host = core.getInput('host');
+        let host = core.getInput('krampus-host');
         if (host === '') {
             host = 'https://api.geodesic.seerai.space/krampus';
         }
