@@ -7,7 +7,7 @@ import * as core from '@actions/core'
 export async function run(): Promise<void> {
   try {
     const apikey: string = core.getInput('api-key')
-    let host: string = core.getInput('host')
+    let host: string = core.getInput('krampus-host')
 
     if (host === '') {
       host = 'https://api.geodesic.seerai.space/krampus'
