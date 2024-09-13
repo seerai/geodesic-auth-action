@@ -34,9 +34,10 @@ export async function run(): Promise<void> {
       }
     }
 
+
     // make sure the response has a token in it
     const json = JSON.parse(await response.text())
-    if (!json['access-token']) {
+    if ( !('access_token' in json) ) {
       throw new Error('Did not recieve a token from Krampus')
     }
 
