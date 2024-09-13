@@ -42,4 +42,3 @@ need to perform some initial setup steps before you can develop your action.
 
    ...
    ```
-
