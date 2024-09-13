@@ -1,0 +1,25 @@
+name: 'Geodesic Authenticate'
+description: 'Authenticate with Geodesic using an API key'
+author: 'SeerAI'
+
+# Add your action's branding here. This will appear on the GitHub Marketplace.
+branding:
+  icon: 'heart'
+  color: 'red'
+
+# Define your inputs here.
+inputs:
+  api-key:
+    description: 'Your input description here'
+    required: true
+    default: '1000'
+  krampus-host:
+    description:
+      "URL for the krampus API. Only required if you're using a custom krampus
+      instance."
+    required: false
+    default: 'https://api.geodesic.seerai.space/krampus'
+
+runs:
+  using: node20
+  main: dist/index.js
