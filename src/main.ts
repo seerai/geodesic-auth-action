@@ -7,15 +7,17 @@ import * as core from '@actions/core'
 export async function run(): Promise<void> {
   try {
     const apikey: string = core.getInput('api-key')
-    let host: string = core.getInput('krampus-host')
+    let host: string = core.getInput('geodesic-host')
 
     if (host === '') {
-      host = 'https://api.geodesic.seerai.space/krampus'
+      host = 'https://api.geodesic.seerai.space'
     }
 
-    console.log(`Authenticating with Krampus at ${host}`)
+    const krampus_host: string = host + '/krampus'
+
+    console.log(`Authenticating with Krampus at ${krampus_host}`)
     // make a get request to krampus to see if the api key is valid
-    const response = await fetch(`${host}/api/v1/auth/token`, {
+    const response = await fetch(`${krampus_host}/api/v1/auth/token`, {
       method: 'GET',
       headers: {
         'Api-Key': apikey

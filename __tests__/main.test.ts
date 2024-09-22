@@ -51,7 +51,7 @@ describe('action', () => {
       switch (name) {
         case 'api-key':
           return 'not an api key'
-        case 'krampus-host':
+        case 'geodesic-host':
           return 'https://api.geodesic.seerai.space/krampus/not-a-url'
         default:
           return ''
