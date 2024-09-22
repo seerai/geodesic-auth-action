@@ -53,9 +53,8 @@ jobs:
   actions, even if they are private repos.
 
 - `geodesic-host`: (Optional) The Geodesic API you wish to use. If not provided
-  this defaults to the SaaS platform at https://api.geodesic.seerai.space. If
-  you are using a self hosted version of Geodesic you can use this option to
-  specify the location of the root API.
+  this defaults to the SaaS platform. If you are using a self hosted version of
+  Geodesic you can use this option to specify the location of the root API.
 
 ## Development
 
