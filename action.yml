@@ -13,12 +13,12 @@ inputs:
     description: 'Your input description here'
     required: true
     default: '1000'
-  krampus-host:
+  geodesic-host:
     description:
-      "URL for the krampus API. Only required if you're using a custom krampus
-      instance."
+      'URL for the Geodesic API. Defaults to the SaaS version
+      (https://api.geodesic.seerai.space).'
     required: false
-    default: 'https://api.geodesic.seerai.space/krampus'
+    default: 'https://api.geodesic.seerai.space'
 
 runs:
   using: node20
